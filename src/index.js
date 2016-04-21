@@ -1,17 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import createLogger from 'redux-logger';
+import persistState from 'redux-localstorage';
 
-import Home from './components/home';
-import Login from './components/login';
-import Signup from './components/signup';
 import App from './components/app';
+import Home from './containers/home';
+import Login from './containers/login';
+import Signup from './containers/signup';
+import User from './containers/user';
 
 import reducers from './reducers';
+import Async from './middlewares/async';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const logger = createLogger();
+
+// Tie the Redux store into local storage
+const createPersistentStore = compose(
+	persistState()
+)(createStore);
+
+// Tie the middleware together with the store
+const createStoreWithMiddleware = applyMiddleware(
+	Async, 
+	logger
+)(createPersistentStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
@@ -20,7 +35,8 @@ ReactDOM.render(
 				<IndexRoute component={Home} />
 				<Route path='login' component={Login}/>
 				<Route path='signup' component={Signup} />
+				<Route path='user' component={User} />
 			</Route>
     </Router>
   </Provider>
-  , document.querySelector('.container'));
+  , document.querySelector('.app'));
