@@ -18,20 +18,26 @@ export default class User extends Component {
 		this.props.getItems(this.props.user.token);
 	}
 
+	renderItems() {
+		return (
+			<ul>
+				{this.props.item.items.map(function(item) {
+					return( 
+						<li key={item._id}>
+							<h3>{item.title}</h3>
+							<p>{item.description}</p>
+						</li>
+					);
+				})}
+			</ul>
+		);
+	}
+
 	render() {
 		return (
 			<div className='container'>
 				<h1>This is the user page, woot!</h1>
-				<ul>
-					{this.props.item.items.map(function(item) {
-						return( 
-							<li key={item._id}>
-								<h3>{item.title}</h3>
-								<p>{item.description}</p>
-							</li>
-						);
-					})}
-				</ul>
+				{this.renderItems()}
 			</div>
 		);
 	}

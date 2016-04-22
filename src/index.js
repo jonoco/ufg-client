@@ -11,6 +11,7 @@ import Home from './containers/home';
 import Login from './containers/login';
 import Signup from './containers/signup';
 import User from './containers/user';
+import Submit from './containers/submit';
 
 import reducers from './reducers';
 import Async from './middlewares/async';
@@ -36,6 +37,7 @@ ReactDOM.render(
 				<Route path='login' component={Login}/>
 				<Route path='signup' component={Signup} />
 				<Route path='user' component={User} />
+				<Route path='submit' component={Submit} />
 			</Route>
     </Router>
   </Provider>

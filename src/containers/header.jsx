@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class Header extends Component {
-	renderLoginButton() {
+	renderLinks() {
 		if (this.props.user.token) {
-			return <button onClick={this.props.logout} className="btn btn-default navbar-btn">Log out</button>
+			return (
+				<ul className="nav navbar-nav">
+					<li><Link to="/user">Item list</Link></li>
+					<li><Link to="/submit">Post item</Link></li>
+					<li><a onClick={this.props.logout}>Log out</a></li>
+				</ul>
+			);
 		} else {
-			return <Link to="/login" className="btn btn-default navbar-btn">Log in</Link>
+			return <Link to="/login">Log in</Link>
 		}
 	}
 
@@ -23,7 +29,7 @@ class Header extends Component {
 			<nav className="navbar navbar-default">
 				<div className="container">
 					<Link to="/" className="navbar-brand">UFG</Link>
-					{this.renderLoginButton()}
+					{this.renderLinks()}
 					{this.renderUsername()}
 				</div>
 			</nav>
