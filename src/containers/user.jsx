@@ -20,10 +20,10 @@ export default class User extends Component {
 
 	renderItems() {
 		return (
-			<ul>
+			<ul className="list-group">
 				{this.props.item.items.map(function(item) {
 					return( 
-						<li key={item._id}>
+						<li key={item._id} className="list-group-item">
 							<h3>{item.title}</h3>
 							<p>{item.description}</p>
 						</li>
@@ -35,7 +35,7 @@ export default class User extends Component {
 
 	render() {
 		return (
-			<div className='container'>
+			<div className="container">
 				<h1>This is the user page, woot!</h1>
 				{this.renderItems()}
 			</div>

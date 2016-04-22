@@ -13,8 +13,6 @@ class Header extends Component {
 					<li><a onClick={this.props.logout}>Log out</a></li>
 				</ul>
 			);
-		} else {
-			return <Link to="/login">Log in</Link>
 		}
 	}
 

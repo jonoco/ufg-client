@@ -3,7 +3,8 @@ import { ITEMS_REQUEST, ITEMS_SUCCESS, ITEMS_FAILURE } from '../actions/types';
 var initialState = {
 	isAccessing: false,
 	items: [],
-	error: null
+	error: null,
+	success: false
 };
 
 export default function(state = initialState, action) {
@@ -19,8 +20,9 @@ export default function(state = initialState, action) {
 			});
 		case ITEMS_FAILURE:
 			return Object.assign({}, state, { 
-				isAccessing: true,
-				error: action.payload.error
+				isAccessing: false,
+				error: action.payload.error,
+				success: false
 			});
 	}
 

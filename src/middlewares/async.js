@@ -27,7 +27,7 @@ export default function({ dispatch }) {
 					dispatch(newAction);
 				})
 				.catch(error => {
-					const newAction = { type: FAILURE, payload: error.data };
+					const newAction = { type: FAILURE, error: error.data };
 					dispatch(newAction);
 				});
 		}

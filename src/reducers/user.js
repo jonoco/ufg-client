@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
 		case SIGNUP_FAILURE:
 			return Object.assign({}, state, {
 				isAccessing: false,
-				error: action.payload.error
+				error: action.error
 			});
 
 		case LOGIN_REQUEST:
@@ -44,7 +44,7 @@ export default function(state = initialState, action) {
 		case LOGIN_FAILURE:
 			return Object.assign({}, state, {
 				isAccessing: false,
-				error: action.payload.error
+				error: action.error
 			});
 
 		case LOG_OUT:

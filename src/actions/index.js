@@ -2,7 +2,8 @@ import {
 	SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
 	LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
 	LOG_OUT,
-	ITEMS_REQUEST, ITEMS_SUCCESS, ITEMS_FAILURE
+	ITEMS_REQUEST, ITEMS_SUCCESS, ITEMS_FAILURE,
+	SUBMIT_REQUEST, SUBMIT_SUCCESS, SUBMIT_FAILURE
 } from './types';
 
 import { api } from '../services/api';
@@ -41,6 +42,20 @@ export const getItems = (token) => {
 
 	return {
 		type: [ ITEMS_REQUEST, ITEMS_SUCCESS, ITEMS_FAILURE ],
+		payload: req
+	};
+}
+
+export const submit = (token, item) => {
+	const req = api.request({
+		url: '/item',
+		method: 'post',
+		headers: { 'authorization': token },
+		data: item
+	});
+
+	return {
+		type: [ SUBMIT_REQUEST, SUBMIT_SUCCESS, SUBMIT_FAILURE ],
 		payload: req
 	};
 }

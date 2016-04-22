@@ -11,3 +11,7 @@ export const LOG_OUT = 'log_out';
 export const ITEMS_REQUEST = 'items_request';
 export const ITEMS_SUCCESS = 'items_success';
 export const ITEMS_FAILURE = 'items_failure';
+
+export const SUBMIT_REQUEST = 'submit_request';
+export const SUBMIT_SUCCESS = 'submit_success';
+export const SUBMIT_FAILURE = 'submit_failure';

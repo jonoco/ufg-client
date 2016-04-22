@@ -33,7 +33,11 @@ class Login extends Component {
 
 	renderErrorMessage() {
 		if (this.props.user.error && this.state.submitted) {
-			return <div className="error">{this.props.user.error}</div>;
+			return (
+				<div className="bg-danger">
+					<p className="text-muted text-center">Wrong username or password</p>
+				</div>
+			);
 		}
 	}
 
