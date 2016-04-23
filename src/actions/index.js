@@ -3,7 +3,8 @@ import {
 	LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
 	LOG_OUT,
 	ITEMS_REQUEST, ITEMS_SUCCESS, ITEMS_FAILURE,
-	SUBMIT_REQUEST, SUBMIT_SUCCESS, SUBMIT_FAILURE
+	SUBMIT_REQUEST, SUBMIT_SUCCESS, SUBMIT_FAILURE,
+	USERS_REQUEST, USERS_SUCCESS, USERS_FAILURE
 } from './types';
 
 import { api } from '../services/api';
@@ -58,5 +59,33 @@ export const submit = (token, item) => {
 		type: [ SUBMIT_REQUEST, SUBMIT_SUCCESS, SUBMIT_FAILURE ],
 		payload: req
 	};
+}
+
+export const getUsers = (token) => {
+	const req = api.request({
+		url: '/user',
+		method: 'get',
+		headers: { 'authorization': token }
+	});
+
+	return {
+		type: [ USERS_REQUEST, USERS_SUCCESS, USERS_FAILURE ],
+		payload: req
+	}
+}
+
+import { ADD_FRIEND_REQUEST, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE } from '../actions/types';
+export const addFriend = (token, friend) => {
+	const req = api.request({
+		url: '/user',
+		method: 'put',
+		headers: { 'authorization': token },
+		data: { friend }
+	});
+
+	return {
+		type: [ ADD_FRIEND_REQUEST, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE ],
+		payload: req
+	}
 }
 

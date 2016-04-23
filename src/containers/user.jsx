@@ -44,7 +44,10 @@ export default class User extends Component {
 }
 
 function mapStateToProps(state) {
-	return { user: state.user, item: state.item };
+	return { 
+		user: state.user, 
+		item: state.item, 
+		users: state.users };
 }
 
 export default connect(mapStateToProps, actions)(User);

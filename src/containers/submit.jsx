@@ -14,6 +14,10 @@ class Submit extends Component {
 		};
 	}
 
+	componentDidUpdate() {
+		if (!this.props.user.token) browserHistory.push('/');
+	}
+
 	handleSubmit(e) {
 		e.preventDefault();
 

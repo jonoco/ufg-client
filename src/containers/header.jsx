@@ -8,9 +8,10 @@ class Header extends Component {
 		if (this.props.user.token) {
 			return (
 				<ul className="nav navbar-nav">
-					<li><Link to="/user">Item list</Link></li>
-					<li><Link to="/submit">Post item</Link></li>
-					<li><a onClick={this.props.logout}>Log out</a></li>
+					<li><Link className="btn" to="/user">Item list</Link></li>
+					<li><Link className="btn" to="/submit">Post item</Link></li>
+					<li><Link className="btn" to="/friends">Friends</Link></li>
+					<li><a className="btn" onClick={this.props.logout}>Log out</a></li>
 				</ul>
 			);
 		}

@@ -1,7 +1,8 @@
 import { 
 	SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
-  LOG_OUT 
+  LOG_OUT,
+  ADD_FRIEND_REQUEST, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE, 
 } from '../actions/types';
 
 const initialState = {
@@ -9,7 +10,8 @@ const initialState = {
 	username: null,
 	error: null,
 	isAccessing: false,
-	onSince: null
+	onSince: null,
+	friends: []
 };
 
 export default function(state = initialState, action) {
@@ -39,12 +41,20 @@ export default function(state = initialState, action) {
 				token: action.payload.token,
 				username: action.payload.username,
 				onSince: new Date().getTime(),
-				error: null
+				error: null,
+				friends: action.payload.friends
 			});
 		case LOGIN_FAILURE:
 			return Object.assign({}, state, {
 				isAccessing: false,
 				error: action.error
+			});
+
+		case ADD_FRIEND_SUCCESS:
+			return Object.assign({}, state, { 
+				isAccessing: false,
+				error: null,
+				friends: [...state.friends, action.payload.friend]
 			});
 
 		case LOG_OUT:
