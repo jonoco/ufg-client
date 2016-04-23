@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
 		case ITEMS_FAILURE:
 			return Object.assign({}, state, { 
 				isAccessing: false,
-				error: action.payload.error,
+				error: action.error,
 				success: false
 			});
 	}

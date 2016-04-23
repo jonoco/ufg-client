@@ -5,4 +5,4 @@
 3. [x] create item page
 4. [x] add state storage middleware
 5. [ ] create production build tooling
-6. [ ] add method to follow friends
+6. [x] add method to follow friends
