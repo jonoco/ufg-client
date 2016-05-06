@@ -16,6 +16,10 @@ class Submit extends Component {
 
 	componentDidUpdate() {
 		if (!this.props.user.token) browserHistory.push('/');
+
+		if (!this.props.submission.isAccessing && !this.props.submission.error && this.state.submitted) {
+			browserHistory.push('/user');
+		}
 	}
 
 	handleSubmit(e) {

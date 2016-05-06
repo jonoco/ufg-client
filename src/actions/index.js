@@ -35,10 +35,15 @@ export const logout = () => {
 	};
 }
 
-export const getItems = (token) => {
+/*
+	taken: bool (false) 		select taken items 				
+	friends: bool (false)		select items from friends, otherwise user 
+ */
+export const getItems = (token, options) => {
 	const req = api.request({
 		url: '/item',
-		headers: { 'authorization': token }
+		headers: { 'authorization': token },
+		data: options
 	});
 
 	return {
@@ -47,12 +52,27 @@ export const getItems = (token) => {
 	};
 }
 
-export const submit = (token, item) => {
+import { DELETE_ITEM_REQUEST, DELETE_ITEM_SUCCESS, DELETE_ITEM_FAILURE } from '../actions/types';
+export const deleteItem = (token, item) => {
+	const req = api.request({
+		url: '/item',
+		method: 'delete',
+		headers: { 'authorization': token },
+		data: item
+	});
+
+	return {
+		type: [ DELETE_ITEM_REQUEST, DELETE_ITEM_SUCCESS, DELETE_ITEM_FAILURE ],
+		payload: req
+	}
+}
+
+export const submit = (token, id) => {
 	const req = api.request({
 		url: '/item',
 		method: 'post',
 		headers: { 'authorization': token },
-		data: item
+		data: id
 	});
 
 	return {
@@ -77,10 +97,10 @@ export const getUsers = (token) => {
 import { ADD_FRIEND_REQUEST, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE } from '../actions/types';
 export const addFriend = (token, friend) => {
 	const req = api.request({
-		url: '/user',
+		url: '/user/friend',
 		method: 'put',
 		headers: { 'authorization': token },
-		data: { friend }
+		data: { friend, addFriend: true }
 	});
 
 	return {
@@ -89,3 +109,17 @@ export const addFriend = (token, friend) => {
 	}
 }
 
+import { REMOVE_FRIEND_REQUEST, REMOVE_FRIEND_SUCCESS, REMOVE_FRIEND_FAILURE } from '../actions/types';
+export const removeFriend = (token, friend) => {
+	const req = api.request({
+		url: '/user/friend',
+		method: 'put',
+		headers: { 'authorization': token },
+		data: { friend, addFriend: false }
+	});
+
+	return {
+		type: [ REMOVE_FRIEND_REQUEST, REMOVE_FRIEND_SUCCESS, REMOVE_FRIEND_FAILURE ],
+		payload: req
+	}
+}

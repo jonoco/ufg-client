@@ -20,10 +20,16 @@ class Friends extends Component {
 		this.props.getUsers(this.props.user.token);
 	}
 
-	handleSubmit(e) {
+	handleAdd(e) {
 		e.preventDefault();
 
 		this.props.addFriend(this.props.user.token, e.target.id);
+	}
+
+	handleRemove(e) {
+		e.preventDefault();
+
+		this.props.removeFriend(this.props.user.token, e.target.id);
 	}
 
 	handleChange(e) {
@@ -32,24 +38,32 @@ class Friends extends Component {
 
 	renderUsers() {
 		return (
-			<div className="list-group">
+			<div className='list-group'>
 				{this.props.users.users.map(function(user) {
 					if (user.email == this.props.user.username) return;
 
-					const friend = (_.includes(this.props.user.friends, user._id)) ? ' list-group-item-success' : '';
-					const className = "list-group-item clearfix" + friend;
+					const isFriend = _.includes(this.props.user.friends, user._id);
+					//const className = "list-group-item clearfix" + friend;
 
 					return(
 						<div 
 							key={user._id} 
-							className={className}>
+							className={isFriend ? 'list-group-item clearfix list-group-item-success' : 'list-group-item clearfix'}>
 							<p>{user.email}</p>
-							<button
-								className="pull-right btn btn-default"
-								onClick={this.handleSubmit.bind(this)}
-								id={user._id}>
-								Add
-							</button>
+							<div className='pull-right' role='group'>
+								<button
+									className={isFriend ? 'hidden' : 'btn btn-default'}
+									onClick={this.handleAdd.bind(this)}
+									id={user._id}>
+									<span className='glyphicon glyphicon-plus' aria-hidden='true'></span>
+								</button>
+								<button
+									className={isFriend ? 'btn btn-danger' : 'hidden'}
+									onClick={this.handleRemove.bind(this)}
+									id={user._id}>
+									<span className='glyphicon glyphicon-remove' aria-hidden='true'></span>
+								</button>
+							</div>
 						</div>
 					);
 				}.bind(this))}
@@ -59,13 +73,13 @@ class Friends extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				<form onSubmit={this.handleSubmit.bind(this)}>
+			<div className='container'>
+				<form onSubmit={this.handleAdd.bind(this)}>
 					<input 
-						type="text" 
+						type='text' 
 						value={this.state.friendName}
 						onChange={this.handleChange.bind(this)}
-						name="friendName" />
+						name='friendName' />
 					<button>Add friend</button>
 				</form>
 				{this.renderUsers.bind(this)()}

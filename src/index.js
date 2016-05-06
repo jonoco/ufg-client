@@ -13,6 +13,7 @@ import Signup from './containers/signup';
 import User from './containers/user';
 import Submit from './containers/submit';
 import Friends from './containers/friends';
+import Items from './containers/items';
 
 import reducers from './reducers';
 import Async from './middlewares/async';
@@ -33,13 +34,14 @@ const createStoreWithMiddleware = applyMiddleware(
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
-			<Route path='/' component={App}>
+			<Route name='home' path='/' component={App}>
 				<IndexRoute component={Home} />
-				<Route path='login' component={Login}/>
-				<Route path='signup' component={Signup} />
-				<Route path='user' component={User} />
-				<Route path='submit' component={Submit} />
-				<Route path='friends' component={Friends} />
+				<Route name='login' path='login' component={Login}/>
+				<Route name='signup' path='signup' component={Signup} />
+				<Route name='user' path='user' component={User} />
+				<Route name='submit' path='submit' component={Submit} />
+				<Route name='friends' path='friends' component={Friends} />
+				<Route name='items' path='items' component={Items} />
 			</Route>
     </Router>
   </Provider>

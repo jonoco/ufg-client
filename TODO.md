@@ -6,3 +6,6 @@
 4. [x] add state storage middleware
 5. [ ] create production build tooling
 6. [x] add method to follow friends
+7. [x] add method to remove friends
+8. [ ] create item detail page
+9. [ ] create messaging system for items

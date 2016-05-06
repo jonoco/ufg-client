@@ -1,4 +1,7 @@
-import { ITEMS_REQUEST, ITEMS_SUCCESS, ITEMS_FAILURE } from '../actions/types';
+import { 
+	ITEMS_REQUEST, ITEMS_SUCCESS, ITEMS_FAILURE,
+	DELETE_ITEM_REQUEST, DELETE_ITEM_SUCCESS, DELETE_ITEM_FAILURE
+} from '../actions/types';
 
 var initialState = {
 	isAccessing: false,
@@ -23,6 +26,18 @@ export default function(state = initialState, action) {
 				isAccessing: false,
 				error: action.error,
 				success: false
+			});
+		case DELETE_ITEM_REQUEST:
+			return Object.assign({}, state, { isAccessing: true });
+		case DELETE_ITEM_SUCCESS:
+			return Object.assign({}, state, {
+				isAccessing: false,
+				error: null
+			});
+		case DELETE_ITEM_FAILURE:
+			return Object.assign({}, state, {
+				isAccessing: false,
+				error: action.error
 			});
 	}
 
