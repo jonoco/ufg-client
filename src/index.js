@@ -22,7 +22,7 @@ const logger = createLogger();
 
 // Tie the Redux store into local storage
 const createPersistentStore = compose(
-	persistState()
+	persistState(null, { key: 'ufg' })
 )(createStore);
 
 // Tie the middleware together with the store

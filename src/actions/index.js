@@ -100,7 +100,7 @@ export const addFriend = (token, friend) => {
 		url: '/user/friend',
 		method: 'put',
 		headers: { 'authorization': token },
-		data: { friend, addFriend: true }
+		data: { friend: friend, addFriend: true }
 	});
 
 	return {
@@ -115,7 +115,7 @@ export const removeFriend = (token, friend) => {
 		url: '/user/friend',
 		method: 'put',
 		headers: { 'authorization': token },
-		data: { friend, addFriend: false }
+		data: { friend: friend, addFriend: false }
 	});
 
 	return {

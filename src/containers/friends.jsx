@@ -22,14 +22,14 @@ class Friends extends Component {
 
 	handleAdd(e) {
 		e.preventDefault();
-
-		this.props.addFriend(this.props.user.token, e.target.id);
+	
+		this.props.addFriend(this.props.user.token, e.currentTarget.dataset.id);
 	}
 
 	handleRemove(e) {
 		e.preventDefault();
 
-		this.props.removeFriend(this.props.user.token, e.target.id);
+		this.props.removeFriend(this.props.user.token, e.currentTarget.dataset.id);
 	}
 
 	handleChange(e) {
@@ -43,7 +43,6 @@ class Friends extends Component {
 					if (user.email == this.props.user.username) return;
 
 					const isFriend = _.includes(this.props.user.friends, user._id);
-					//const className = "list-group-item clearfix" + friend;
 
 					return(
 						<div 
@@ -54,13 +53,13 @@ class Friends extends Component {
 								<button
 									className={isFriend ? 'hidden' : 'btn btn-default'}
 									onClick={this.handleAdd.bind(this)}
-									id={user._id}>
+									data-id={user._id}>
 									<span className='glyphicon glyphicon-plus' aria-hidden='true'></span>
 								</button>
 								<button
 									className={isFriend ? 'btn btn-danger' : 'hidden'}
 									onClick={this.handleRemove.bind(this)}
-									id={user._id}>
+									data-id={user._id}>
 									<span className='glyphicon glyphicon-remove' aria-hidden='true'></span>
 								</button>
 							</div>
@@ -74,7 +73,9 @@ class Friends extends Component {
 	render() {
 		return (
 			<div className='container'>
-				<form onSubmit={this.handleAdd.bind(this)}>
+				<form 
+					className='hidden'
+					onSubmit={this.handleAdd.bind(this)}>
 					<input 
 						type='text' 
 						value={this.state.friendName}
