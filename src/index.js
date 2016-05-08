@@ -14,6 +14,8 @@ import User from './containers/user';
 import Submit from './containers/submit';
 import Friends from './containers/friends';
 import Items from './containers/items';
+import RequireAuth from './containers/require-auth';
+import ItemDetail from './containers/item-detail';
 
 import reducers from './reducers';
 import Async from './middlewares/async';
@@ -36,12 +38,14 @@ ReactDOM.render(
     <Router history={browserHistory}>
 			<Route name='home' path='/' component={App}>
 				<IndexRoute component={Home} />
-				<Route name='login' path='login' component={Login}/>
+				<Route name='login' path='login' component={Login} />
 				<Route name='signup' path='signup' component={Signup} />
-				<Route name='user' path='user' component={User} />
-				<Route name='submit' path='submit' component={Submit} />
-				<Route name='friends' path='friends' component={Friends} />
-				<Route name='items' path='items' component={Items} />
+				<Route name='user' path='user' component={RequireAuth(User)} />
+				<Route name='submit' path='submit' component={RequireAuth(Submit)} />
+				<Route name='friends' path='friends' component={RequireAuth(Friends)} />
+				<Route name='items' path='items' component={RequireAuth(Items)} >
+					<Route path=':itemID' component={ItemDetail} />
+				</Route>
 			</Route>
     </Router>
   </Provider>

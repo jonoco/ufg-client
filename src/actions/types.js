@@ -31,3 +31,11 @@ export const ADD_FRIEND_FAILURE = 'add_friend_failure';
 export const REMOVE_FRIEND_REQUEST = 'remove_friend_request';
 export const REMOVE_FRIEND_SUCCESS = 'remove_friend_success';
 export const REMOVE_FRIEND_FAILURE = 'remove_friend_failure';
+
+export const GET_MESSAGE_REQUEST = 'get_message_request';
+export const GET_MESSAGE_SUCCESS = 'get_message_success';
+export const GET_MESSAGE_FAILURE = 'get_message_failure';
+
+export const SEND_MESSAGE_REQUEST = 'send_message_request';
+export const SEND_MESSAGE_SUCCESS = 'send_message_success';
+export const SEND_MESSAGE_FAILURE = 'send_message_failure';

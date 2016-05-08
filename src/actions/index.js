@@ -64,7 +64,7 @@ export const deleteItem = (token, item) => {
 	return {
 		type: [ DELETE_ITEM_REQUEST, DELETE_ITEM_SUCCESS, DELETE_ITEM_FAILURE ],
 		payload: req
-	}
+	};
 }
 
 export const submit = (token, id) => {
@@ -91,7 +91,7 @@ export const getUsers = (token) => {
 	return {
 		type: [ USERS_REQUEST, USERS_SUCCESS, USERS_FAILURE ],
 		payload: req
-	}
+	};
 }
 
 import { ADD_FRIEND_REQUEST, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE } from '../actions/types';
@@ -106,7 +106,7 @@ export const addFriend = (token, friend) => {
 	return {
 		type: [ ADD_FRIEND_REQUEST, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE ],
 		payload: req
-	}
+	};
 }
 
 import { REMOVE_FRIEND_REQUEST, REMOVE_FRIEND_SUCCESS, REMOVE_FRIEND_FAILURE } from '../actions/types';
@@ -121,5 +121,34 @@ export const removeFriend = (token, friend) => {
 	return {
 		type: [ REMOVE_FRIEND_REQUEST, REMOVE_FRIEND_SUCCESS, REMOVE_FRIEND_FAILURE ],
 		payload: req
-	}
+	};
+}
+
+import { GET_MESSAGE_REQUEST, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAILURE } from '../actions/types';
+export const getMessages = (token) => {
+	const req = api.request({
+		url:'/message',
+		method: 'get',
+		headers: { 'authorization': token }
+	});
+
+	return {
+		type: [ GET_MESSAGE_REQUEST, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAILURE ],
+		payload: req
+	};
+}
+
+import { SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAILURE } from '../actions/types';
+export const sendMessage = (token, message) => {
+	const req = api .request({
+		url: '/message',
+		method: 'post',
+		headers: { 'authorization': token },
+		data: { ...message, time: new Date().getTime() }
+	});
+
+	return {
+		type: [ SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAILURE ],
+		payload: req
+	};
 }
