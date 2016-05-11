@@ -67,12 +67,12 @@ export const deleteItem = (token, item) => {
 	};
 }
 
-export const submit = (token, id) => {
+export const submitItem = (token, item) => {
 	const req = api.request({
 		url: '/item',
 		method: 'post',
 		headers: { 'authorization': token },
-		data: id
+		data: item
 	});
 
 	return {
@@ -140,7 +140,7 @@ export const getMessages = (token) => {
 
 import { SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAILURE } from '../actions/types';
 export const sendMessage = (token, message) => {
-	const req = api .request({
+	const req = api.request({
 		url: '/message',
 		method: 'post',
 		headers: { 'authorization': token },
@@ -149,6 +149,21 @@ export const sendMessage = (token, message) => {
 
 	return {
 		type: [ SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAILURE ],
+		payload: req
+	};
+}
+
+import { ACCEPT_REQUEST_REQUEST, ACCEPT_REQUEST_SUCCESS, ACCEPT_REQUEST_FAILURE } from '../actions/types';
+export const acceptRequest = (token, message) => {
+	const req = api.request({
+		url: '/message/accept',
+		method: 'post',
+		headers: { 'authorization': token },
+		data: { message }
+	});
+
+	return {
+		type: [ ACCEPT_REQUEST_REQUEST, ACCEPT_REQUEST_SUCCESS, ACCEPT_REQUEST_FAILURE ],
 		payload: req
 	};
 }

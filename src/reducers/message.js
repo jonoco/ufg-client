@@ -3,6 +3,8 @@ import {
 	SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAILURE 
 } from '../actions/types';
 
+import _ from 'lodash';
+
 const initialState = {
 	isAccessing: false,
 	messages: [],
@@ -30,6 +32,7 @@ export default function(state = initialState, action) {
 		case SEND_MESSAGE_SUCCESS:
 			return Object.assign({}, state, {
 				isAccessing: false,
+				messages: [...state.messages, action.payload],
 				error: null
 			});
 		case SEND_MESSAGE_FAILURE:

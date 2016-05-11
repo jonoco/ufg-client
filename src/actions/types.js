@@ -39,3 +39,8 @@ export const GET_MESSAGE_FAILURE = 'get_message_failure';
 export const SEND_MESSAGE_REQUEST = 'send_message_request';
 export const SEND_MESSAGE_SUCCESS = 'send_message_success';
 export const SEND_MESSAGE_FAILURE = 'send_message_failure';
+
+export const ACCEPT_REQUEST_REQUEST = 'accept_request_request';
+export const ACCEPT_REQUEST_SUCCESS = 'accept_request_success';
+export const ACCEPT_REQUEST_FAILURE = 'accept_request_failure';
+

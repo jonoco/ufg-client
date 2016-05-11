@@ -12,6 +12,7 @@ class Header extends Component {
 						<li><Link className="btn" to="/items">Item list</Link></li>
 						<li><Link className="btn" to="/submit">Post item</Link></li>
 						<li><Link className="btn" to="/friends">Friends</Link></li>
+						<li><Link className="btn" to="/notifications">Notifications</Link></li>
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
 						<li><Link className="btn" to="/user">{this.props.user.username}</Link></li>

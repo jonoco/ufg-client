@@ -14,10 +14,11 @@ class ItemDetail extends Component {
 	handleFormSubmit({ message }) {
 		this.props.sendMessage(this.props.token, {
 			text: message,
-			item: this.item._id,
+			itemID: this.item._id,
+			itemTitle: this.item.title,
 			to: this.item.username
 		});
-		
+
 		this.props.resetForm();
 	}
 

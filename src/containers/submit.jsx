@@ -27,7 +27,7 @@ class Submit extends Component {
 
 		const { title, description } = this.state;
 
-		this.props.submit(this.props.user.token, { title, description });
+		this.props.submitItem(this.props.user.token, { title, description });
 		this.setState({ submitted: true });
 	}
 

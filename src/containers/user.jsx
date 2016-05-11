@@ -5,13 +5,7 @@ import * as actions from '../actions';
 
 class User extends Component {
 	componentDidMount() {
-		if (!this.props.user.token) browserHistory.push('/');
-
 		this.loadItems();
-	}
-
-	componentDidUpdate() {
-		if (!this.props.user.token) browserHistory.push('/');
 	}
 
 	loadItems() {
@@ -53,7 +47,7 @@ class User extends Component {
 	render() {
 		return (
 			<div className="container">
-				<h1>This is the user page, woot!</h1>
+				<h2>My posted items</h2>
 				{this.renderItems()}
 			</div>
 		);
@@ -63,7 +57,8 @@ class User extends Component {
 function mapStateToProps(state) {
 	return { 
 		user: state.user, 
-		item: state.item
+		item: state.item,
+		messages: state.message.messages
 	};
 }
 
