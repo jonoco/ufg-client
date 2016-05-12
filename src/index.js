@@ -15,8 +15,6 @@ import Submit from './containers/submit';
 import Friends from './containers/friends';
 import Items from './containers/items';
 import RequireAuth from './containers/require-auth';
-import ItemDetail from './containers/item-detail';
-import ItemMessage from './containers/item-message';
 import Notification from './containers/notifications';
 
 import reducers from './reducers';
@@ -45,12 +43,8 @@ ReactDOM.render(
 				<Route name='user' path='user' component={RequireAuth(User)} />
 				<Route name='submit' path='submit' component={RequireAuth(Submit)} />
 				<Route name='friends' path='friends' component={RequireAuth(Friends)} />
-				<Route name='items' path='items' component={RequireAuth(Items)} >
-					<Route path=':itemID' component={RequireAuth(ItemDetail)} />
-				</Route>
-				<Route name='notifications' path='notifications' component={RequireAuth(Notification)} >
-					<Route path=':itemID' component={RequireAuth(ItemMessage)} />
-				</Route>
+				<Route name='items' path='items' component={RequireAuth(Items)} />
+				<Route name='notifications' path='notifications' component={RequireAuth(Notification)} />
 			</Route>
     </Router>
   </Provider>

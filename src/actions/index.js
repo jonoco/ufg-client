@@ -156,7 +156,7 @@ export const sendMessage = (token, message) => {
 import { ACCEPT_REQUEST_REQUEST, ACCEPT_REQUEST_SUCCESS, ACCEPT_REQUEST_FAILURE } from '../actions/types';
 export const acceptRequest = (token, message) => {
 	const req = api.request({
-		url: '/message/accept',
+		url: '/acceptRequest',
 		method: 'post',
 		headers: { 'authorization': token },
 		data: { message }

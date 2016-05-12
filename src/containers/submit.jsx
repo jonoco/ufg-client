@@ -10,6 +10,9 @@ class Submit extends Component {
 		this.state = {
 			title: '',
 			description: '',
+			imageURI: null,
+			imageName: null,
+			imageType: null,
 			submitted: false
 		};
 	}
@@ -25,14 +28,29 @@ class Submit extends Component {
 	handleSubmit(e) {
 		e.preventDefault();
 
-		const { title, description } = this.state;
+		const { title, description, imageURI, imageType } = this.state;
 
-		this.props.submitItem(this.props.user.token, { title, description });
+		this.props.submitItem(this.props.user.token, { title, description, imageURI, imageType });
 		this.setState({ submitted: true });
 	}
 
 	handleChange(e) {
 		this.setState({ [e.target.name]: e.target.value });
+	}
+
+	handleFile(e) {
+		const reader = new FileReader();
+		const file = e.target.files[0];
+
+		reader.onload = upload => {
+			this.setState({
+				imageURI: upload.target.result,
+				imageName: file.name,
+				imageType: file.type
+			});
+		}
+
+		reader.readAsDataURL(file);
 	}
 
 	renderErrorMessage() {
@@ -43,6 +61,18 @@ class Submit extends Component {
 				</div>
 			);
 		}
+	}
+
+	renderImage() {
+		if (!this.state.imageURI) return;
+
+		return (
+			<div className="row">
+				<div className="col-sm-4">
+					<img className='img-rounded img-responsive' src={this.state.imageURI} />
+				</div>
+			</div>
+		);
 	}
 
 	render() {
@@ -66,6 +96,15 @@ class Submit extends Component {
 							onChange={this.handleChange.bind(this)} 
 							type="text"
 							name="description"/>
+					</div>
+					<div className="form-group">
+						<label>Image</label>
+						{this.renderImage()}
+						<input 
+							className="form-control"
+							onChange={this.handleFile.bind(this)}
+							type="file"
+							name="image" />
 					</div>
 
 					{this.renderErrorMessage()}

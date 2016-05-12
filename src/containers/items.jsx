@@ -97,10 +97,15 @@ class Items extends Component {
 							<button 
 								onClick={this.handleItemClick.bind(this)} 
 								data-id={item._id} 
-								className="list-group-item">	
-								<h3>{item.title}</h3>
-								<h4>{item.username}</h4>
-								<p>{item.description}</p>
+								className="list-group-item row">
+								<div className="col-sm-2">
+									<img src={item.imageURI} width='64'/>	
+								</div>
+								<div className="col-sm-10">
+									<h3>{item.title}</h3>
+									<h4>{item.username}</h4>
+									<p>{item.description}</p>
+								</div>
 							</button>
 							{this.state.message ? this.renderMessage() : this.renderRequestForm(item)}
 						</div>

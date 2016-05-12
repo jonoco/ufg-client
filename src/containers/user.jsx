@@ -16,19 +16,30 @@ class User extends Component {
 		this.props.deleteItem(this.props.user.token, {id: e.target.id});
 	}
 
+	convertImageBuffer(buffer, type) {
+		let base64String = btoa(String.fromCharCode(...new Uint8Array(buffer)))
+		console.log(`data:${type};base64,${base64String}`);
+		return `data:${type};base64,${base64String}`;
+	}
+
 	renderItems() {
 		return (
-			<ul className="list-group">
+			<ul className="media-list">
 				{this.props.item.items.map(function(item) {
 					if (item.user != this.props.user.id) return;
 
+					//const imageSrc = this.convertImageBuffer(item.imageURI.data, item.imageType);
+
 					return( 
-						<li key={item._id} className="list-group-item row">
-							<div className="col-sm-10">
+						<li key={item._id} className="media">
+							<div className="media-left">
+								<img src={item.imageURI} width='64' className="media-object"/>
+							</div>
+							<div className="media-body">
 								<h4>{item.title}</h4>
 								<p>{item.description}</p>
 							</div>
-							<div className="col-sm-2">
+							<div className="media-right">
 								<br />
 								<button 
 									className="btn btn-danger" 
