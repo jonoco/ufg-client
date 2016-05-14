@@ -19,7 +19,7 @@ class Items extends Component {
 	}
 
 	loadItems() {
-		this.props.getItems(this.props.user.token, {friends: true});
+		this.props.getItems(this.props.user.token, '?friends=true');
 	}
 
 	handleItemClick(e) {
@@ -94,9 +94,8 @@ class Items extends Component {
 
 					return(
 						<div key={item._id}>
-							<button 
-								onClick={this.handleItemClick.bind(this)} 
-								data-id={item._id} 
+							<Link 
+								to={`items/${item._id}?user=${item.postedBy}`} 
 								className="list-group-item row">
 								<div className="col-sm-2">
 									<img src={item.imageURI} width='64'/>	
@@ -106,8 +105,7 @@ class Items extends Component {
 									<h4>{item.username}</h4>
 									<p>{item.description}</p>
 								</div>
-							</button>
-							{this.state.message ? this.renderMessage() : this.renderRequestForm(item)}
+							</Link>
 						</div>
 					);
 				})}

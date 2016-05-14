@@ -39,11 +39,10 @@ export const logout = () => {
 	taken: bool (false) 		select taken items 				
 	friends: bool (false)		select items from friends, otherwise user 
  */
-export const getItems = (token, options) => {
+export const getItems = (token, query) => {
 	const req = api.request({
-		url: '/item',
-		headers: { 'authorization': token },
-		data: options
+		url: `/item${query || ''}`,
+		headers: { 'authorization': token }
 	});
 
 	return {
@@ -55,10 +54,9 @@ export const getItems = (token, options) => {
 import { DELETE_ITEM_REQUEST, DELETE_ITEM_SUCCESS, DELETE_ITEM_FAILURE } from '../actions/types';
 export const deleteItem = (token, item) => {
 	const req = api.request({
-		url: '/item',
+		url: `/item/${item}`,
 		method: 'delete',
-		headers: { 'authorization': token },
-		data: item
+		headers: { 'authorization': token }
 	});
 
 	return {
@@ -97,10 +95,10 @@ export const getUsers = (token) => {
 import { ADD_FRIEND_REQUEST, ADD_FRIEND_SUCCESS, ADD_FRIEND_FAILURE } from '../actions/types';
 export const addFriend = (token, friend) => {
 	const req = api.request({
-		url: '/user/friend',
-		method: 'put',
+		url: `/user/friend`,
+		method: 'post',
 		headers: { 'authorization': token },
-		data: { friend: friend, addFriend: true }
+		data: { friend: friend }
 	});
 
 	return {
@@ -113,9 +111,9 @@ import { REMOVE_FRIEND_REQUEST, REMOVE_FRIEND_SUCCESS, REMOVE_FRIEND_FAILURE } f
 export const removeFriend = (token, friend) => {
 	const req = api.request({
 		url: '/user/friend',
-		method: 'put',
+		method: 'delete',
 		headers: { 'authorization': token },
-		data: { friend: friend, addFriend: false }
+		data: { friend: friend }
 	});
 
 	return {
@@ -127,7 +125,7 @@ export const removeFriend = (token, friend) => {
 import { GET_MESSAGE_REQUEST, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAILURE } from '../actions/types';
 export const getMessages = (token) => {
 	const req = api.request({
-		url:'/message',
+		url:'/message/user',
 		method: 'get',
 		headers: { 'authorization': token }
 	});

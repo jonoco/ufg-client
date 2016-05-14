@@ -34,19 +34,19 @@ class Notification extends Component {
 	}
 
 	handleAcceptRequest(e) {
-		console.log('accepting message: ', this.state.message);
 		// update message.status from pending to accepted
 		this.props.acceptRequest(this.props.user.token, this.state.message);
 	}
 
-	renderMessage() {
-		// received requests should be acceptable
-		const isReceived = this.state.message.userTo === this.props.user.username;
-		
+	renderMessage(message, user) {	
 		return (
-			<div className='well'>
-				<p>{this.state.message.text}</p>
-				{isReceived && <button className="btn btn-default" onClick={this.handleAcceptRequest.bind(this)}>Accept</button>}
+			<div key={message._id}>
+				<Link 
+					to={`items/${message.itemID}?user=${user}`} 
+					className="list-group-item">
+					{message.itemTitle}
+					<span className='pull-right'>{message.userFrom}</span>
+				</Link>
 			</div>
 		);
 	}
@@ -61,23 +61,7 @@ class Notification extends Component {
 					if (message.userFrom === this.props.user.username && !_.includes(displayedItems, message.itemID)) {
 						displayedItems.push(message.itemID);
 
-						const accepted = message.status === 'accepted';
-						console.log(accepted, message);
-
-						return (
-							<div key={message._id}>
-								<button 
-									onClick={this.handleMessageClick.bind(this)} 
-									data-id={message._id}
-									className={`list-group-item ${accepted ? 'list-group-item-success' : ''}`}>
-									{message.itemTitle}
-									<span className='pull-right'>{message.userTo}</span>
-									<br/>
-									<small>Status: {message.status}</small>
-								</button>
-								{this.state.openMessageID === message._id ? this.renderMessage(): null}
-							</div>
-						);
+						return this.renderMessage(message, message.userTo);
 					}
 				})}
 			</div>
@@ -89,7 +73,7 @@ class Notification extends Component {
 		const displayedMessages = {};
 
 		// filter all messages to me
-		const requests = this.props.messages.filter(message => {
+		const requests = _.filter(this.props.messages, message => {
 			if (message.userTo === this.props.user.username) return message;
 		})
 
@@ -106,18 +90,7 @@ class Notification extends Component {
 						// hide duplicates from same user
 						displayedMessages[message.itemID].push(message.userFrom);
 		
-						return (
-							<div key={message._id}>
-								<button 
-									onClick={this.handleMessageClick.bind(this)} 
-									data-id={message._id}
-									className="list-group-item">
-									{message.itemTitle}
-									<span className='pull-right'>{message.userFrom}</span>
-								</button>
-								{this.state.openMessageID === message._id ? this.renderMessage(): null}
-							</div>
-						);
+						return this.renderMessage(message, message.userFrom);
 					}
 				})}
 			</div>

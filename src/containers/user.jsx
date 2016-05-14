@@ -13,7 +13,7 @@ class User extends Component {
 	}
 
 	handleDelete(e) {
-		this.props.deleteItem(this.props.user.token, {id: e.target.id});
+		this.props.deleteItem(this.props.user.token, e.currentTarget.dataset.id);
 	}
 
 	convertImageBuffer(buffer, type) {
@@ -26,7 +26,7 @@ class User extends Component {
 		return (
 			<ul className="media-list">
 				{this.props.item.items.map(function(item) {
-					if (item.user != this.props.user.id) return;
+					if (item.postedBy !== this.props.user.username) return;
 
 					//const imageSrc = this.convertImageBuffer(item.imageURI.data, item.imageType);
 
@@ -43,7 +43,7 @@ class User extends Component {
 								<br />
 								<button 
 									className="btn btn-danger" 
-									id={item._id}
+									data-id={item._id}
 									onClick={this.handleDelete.bind(this)}>
 									Delete
 								</button>

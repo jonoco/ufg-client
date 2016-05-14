@@ -36,6 +36,10 @@ export const GET_MESSAGE_REQUEST = 'get_message_request';
 export const GET_MESSAGE_SUCCESS = 'get_message_success';
 export const GET_MESSAGE_FAILURE = 'get_message_failure';
 
+export const GET_ITEM_MESSAGE_REQUEST = 'get_item_message_request';
+export const GET_ITEM_MESSAGE_SUCCESS = 'get_item_message_success';
+export const GET_ITEM_MESSAGE_FAILURE = 'get_item_message_failure';
+
 export const SEND_MESSAGE_REQUEST = 'send_message_request';
 export const SEND_MESSAGE_SUCCESS = 'send_message_success';
 export const SEND_MESSAGE_FAILURE = 'send_message_failure';

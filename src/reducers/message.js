@@ -1,6 +1,6 @@
 import { 
 	GET_MESSAGE_REQUEST, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAILURE,
-	SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAILURE 
+	SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAILURE
 } from '../actions/types';
 
 import _ from 'lodash';
@@ -32,7 +32,7 @@ export default function(state = initialState, action) {
 		case SEND_MESSAGE_SUCCESS:
 			return Object.assign({}, state, {
 				isAccessing: false,
-				messages: [...state.messages, action.payload],
+				messages: [...state.messages, action.payload.message],
 				error: null
 			});
 		case SEND_MESSAGE_FAILURE:
